@@ -33,6 +33,16 @@ public class EventController {
         return ResponseEntity.ok(events);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<Event>> searchEvents(
+            @RequestParam(required = false) String title,
+            @RequestParam(required = false) UUID categoryId,
+            @RequestParam(required = false) String location) {
+        List<Event> events = eventService.searchEvents(title, categoryId, location);
+        return ResponseEntity.ok(events);
+    }
+
+
     @GetMapping("/{categoryId}")
     public ResponseEntity<List<Event>> getEventsByCategoryId(@PathVariable UUID categoryId) throws CategoryNotFoundByIdException {
         List<Event> events = eventService.getAllByCategoryId(categoryId);
@@ -43,7 +53,7 @@ public class EventController {
     public ResponseEntity<Event> createEvent(@RequestBody CreateEventRequestBody createEventRequestBody)
             throws CategoryNotFoundByIdException {
         Event event = eventService.create(createEventRequestBody.title(), createEventRequestBody.content(),
-                createEventRequestBody.categoryId());
+                createEventRequestBody.categoryId(),createEventRequestBody.location(),createEventRequestBody.dateTime(),createEventRequestBody.userId());
         return ResponseEntity
                 .created(URI.create("v1/events" + event.getId()))
                 .body(event);
