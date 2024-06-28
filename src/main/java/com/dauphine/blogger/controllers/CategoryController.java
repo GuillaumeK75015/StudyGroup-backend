@@ -20,7 +20,7 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping     ("")
+    @GetMapping("")
     public ResponseEntity<List<Category>> getAllCategories(@RequestParam(required = false) String name){
         List<Category> categories = name == null || name.isBlank()
                 ? categoryService.getAll()

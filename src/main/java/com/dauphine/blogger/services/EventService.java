@@ -1,5 +1,7 @@
 package com.dauphine.blogger.services;
 
+import com.dauphine.blogger.controllers.requestbody.RatingReviewRequest;
+import com.dauphine.blogger.models.Category;
 import com.dauphine.blogger.models.Event;
 
 import com.dauphine.blogger.services.exceptions.CategoryNotFoundByIdException;
@@ -22,9 +24,16 @@ public interface EventService {
 
     Event getById(UUID id) throws EventNotFoundByIdException;
 
-    Event create(String title, String content, UUID categoryId, String location, LocalDateTime dateTime, UUID uuid) throws CategoryNotFoundByIdException;
+    Event create(String title, String content, UUID categoryId, String location, LocalDateTime dateTime, String creatorName) throws CategoryNotFoundByIdException;
 
-    Event update(UUID id, String title, String content) throws EventNotFoundByIdException;
+    Event update(UUID eventId, String title, String content, String location, LocalDateTime dateTime, UUID categoryId, String lastModifiedBy)
+            throws EventNotFoundByIdException, CategoryNotFoundByIdException;
+    Event addParticipant(UUID eventId, String participant) throws EventNotFoundByIdException;
+
+    Event addRatingReview(UUID eventId, RatingReviewRequest ratingReviewRequest) throws EventNotFoundByIdException;
+
+    Event removeParticipant(UUID eventId, String participant) throws EventNotFoundByIdException;
+
 
     void deleteById(UUID id) throws EventNotFoundByIdException;
 }

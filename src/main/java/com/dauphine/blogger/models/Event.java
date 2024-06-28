@@ -1,14 +1,16 @@
 package com.dauphine.blogger.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name = "event")
 public class Event {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private UUID id;
 
@@ -31,14 +33,27 @@ public class Event {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column(name = "creator_name")
+    private String creatorName;
+
+    @Column(name = "last_modified_by")
+    private String lastModifiedBy;
+
+    @ElementCollection
+    @CollectionTable(name = "event_participants", joinColumns = @JoinColumn(name = "event_id"))
+    @Column(name = "participant_name")
+    private Set<String> participants = new HashSet<>();
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<EventReview> reviews = new ArrayList<>();
+
+    // Constructors, Getters and Setters
 
     public Event() {
     }
 
-    public Event(String title, String content, Category category, String location, LocalDateTime dateTime, User user) {
+    public Event(String title, String content, Category category, String location, LocalDateTime dateTime, String creatorName) {
         this.id = UUID.randomUUID();
         this.title = title;
         this.content = content;
@@ -46,7 +61,7 @@ public class Event {
         this.category = category;
         this.location = location;
         this.dateTime = dateTime;
-        this.user = user;
+        this.creatorName = creatorName;
     }
 
     public UUID getId() {
@@ -81,12 +96,12 @@ public class Event {
         this.createdDate = createdDate;
     }
 
-    public Category getCategory() {
-        return category;
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
 
     public String getLocation() {
@@ -97,19 +112,43 @@ public class Event {
         this.location = location;
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
-    public User getUser() {
-        return user;
+    public String getCreatorName() {
+        return creatorName;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setCreatorName(String creatorName) {
+        this.creatorName = creatorName;
+    }
+
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
+    }
+
+    public Set<String> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(Set<String> participants) {
+        this.participants = participants;
+    }
+
+    public List<EventReview> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<EventReview> reviews) {
+        this.reviews = reviews;
     }
 }

@@ -20,4 +20,5 @@ public interface EventRepository extends JpaRepository<Event, UUID> {
             + "(:location IS NULL OR e.location LIKE %:location%)")
     List<Event> searchEvents(@Param("title") String title, @Param("categoryId") UUID categoryId, @Param("location") String location);
 
+
 }

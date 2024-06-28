@@ -16,7 +16,8 @@ public interface CategoryService {
 
     Category create(String name);
 
-    Category updateName(UUID id, String name) throws CategoryNotFoundByIdException;
+
+     Category updateName(UUID id, String name) throws CategoryNotFoundByIdException;
     
     void deleteById(UUID id) throws CategoryNotFoundByIdException;
 }
