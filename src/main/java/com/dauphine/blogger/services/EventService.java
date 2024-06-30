@@ -19,8 +19,7 @@ public interface EventService {
 
     List<Event> getAllByTitleOrContent(String titleOrContent);
 
-    List<Event> searchEvents(String title, UUID categoryId, String location);
-
+    List<Event> searchEvents(String title, String categoryId, String location, String content);
 
     Event getById(UUID id) throws EventNotFoundByIdException;
 

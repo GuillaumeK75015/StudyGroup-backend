@@ -42,11 +42,14 @@ public class EventController {
     @GetMapping("/search")
     public ResponseEntity<List<Event>> searchEvents(
             @RequestParam(required = false) String title,
-            @RequestParam(required = false) UUID categoryId,
-            @RequestParam(required = false) String location) {
-        List<Event> events = eventService.searchEvents(title, categoryId, location);
+            @RequestParam(required = false) String categoryId,
+            @RequestParam(required = false) String location,
+            @RequestParam(required = false) String content) {
+
+        List<Event> events = eventService.searchEvents(title, categoryId, location, content);
         return ResponseEntity.ok(events);
     }
+
 
     @GetMapping("/category/{categoryId}")
     public ResponseEntity<List<Event>> getEventsByCategoryId(@PathVariable UUID categoryId) throws CategoryNotFoundByIdException {

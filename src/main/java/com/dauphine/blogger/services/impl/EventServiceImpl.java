@@ -9,13 +9,17 @@ import com.dauphine.blogger.services.CategoryService;
 import com.dauphine.blogger.services.EventService;
 import com.dauphine.blogger.services.exceptions.CategoryNotFoundByIdException;
 import com.dauphine.blogger.services.exceptions.EventNotFoundByIdException;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import jakarta.persistence.criteria.Predicate;
+
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
+
 
 @Service
 public class EventServiceImpl implements EventService {
@@ -34,11 +38,34 @@ public class EventServiceImpl implements EventService {
         categoryService.getById(categoryId);
         return eventRepository.findAllByCategoryId(categoryId);
     }
-
     @Override
-    public List<Event> searchEvents(String title, UUID categoryId, String location) {
-        return eventRepository.searchEvents(title, categoryId, location);
+    public List<Event> searchEvents(String title, String categoryId, String location, String content) {
+        // Implement search logic that handles case-insensitivity and partial matches
+        // Example using JPA Specification or Criteria API
+        return eventRepository.findAll(new Specification<Event>() {
+            @Override
+            public Predicate toPredicate(Root<Event> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+                List<Predicate> predicates = new ArrayList<>();
+
+                if (title != null && !title.isEmpty()) {
+                    predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("title")), "%" + title.toLowerCase() + "%"));
+                }
+                if (categoryId != null && !categoryId.isEmpty()) {
+                    predicates.add(criteriaBuilder.equal(root.get("category").get("id"), categoryId));
+                }
+                if (location != null && !location.isEmpty()) {
+                    predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("location")), "%" + location.toLowerCase() + "%"));
+                }
+                if (content != null && !content.isEmpty()) {
+                    predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("content")), "%" + content.toLowerCase() + "%"));
+                }
+
+                return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
+            }
+        });
     }
+
+
 
     @Override
     public List<Event> getAll() {
