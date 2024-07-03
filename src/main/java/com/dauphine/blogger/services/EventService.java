@@ -1,9 +1,7 @@
 package com.dauphine.blogger.services;
 
 import com.dauphine.blogger.controllers.requestbody.RatingReviewRequest;
-import com.dauphine.blogger.models.Category;
 import com.dauphine.blogger.models.Event;
-
 import com.dauphine.blogger.services.exceptions.CategoryNotFoundByIdException;
 import com.dauphine.blogger.services.exceptions.EventNotFoundByIdException;
 

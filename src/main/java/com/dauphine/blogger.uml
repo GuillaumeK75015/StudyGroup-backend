@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>C:/Users/guika/Desktop/Workspace/dauphine/Dev Web Project/Event-backend/src/main/java/com/dauphine/blogger</OriginalElement>
+  <nodes>
+    <node x="379.5" y="-12.5">com.dauphine.blogger.services.EventService</node>
+    <node x="1136.0" y="210.0">com.dauphine.blogger.models.Event</node>
+    <node x="1612.5" y="426.0">com.dauphine.blogger.models.Category</node>
+    <node x="1546.0" y="1114.0">com.dauphine.blogger.services.impl.CategoryServiceImpl</node>
+    <node x="-284.8198741573034" y="1126.0">com.dauphine.blogger.controllers.CategoryController</node>
+    <node x="461.0" y="1127.5">com.dauphine.blogger.services.CategoryService</node>
+    <node x="1547.5" y="1387.5">com.dauphine.blogger.services.exceptions.CategoryNotFoundByIdException</node>
+    <node x="-59.0" y="475.5">com.dauphine.blogger.repository.EventRepository</node>
+    <node x="1907.0" y="1187.5">com.dauphine.blogger.repository.CategoryRepository</node>
+    <node x="379.5" y="354.0">com.dauphine.blogger.services.impl.EventServiceImpl</node>
+    <node x="1792.5" y="-14.0">com.dauphine.blogger.controllers.EventController</node>
+    <node x="864.5" y="886.0">com.dauphine.blogger.models.EventReview</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.dauphine.blogger.models.Event" target="com.dauphine.blogger.models.EventReview" relationship="TO_MANY">
+      <point x="0.0" y="309.0" />
+      <point x="1343.0" y="1039.0" />
+      <point x="118.5" y="0.0" />
+    </edge>
+    <edge source="com.dauphine.blogger.services.impl.EventServiceImpl" target="com.dauphine.blogger.models.Event" relationship="CREATE">
+      <point x="223.5" y="0.0" />
+      <point x="-207.0" y="0.0" />
+    </edge>
+    <edge source="com.dauphine.blogger.controllers.EventController" target="com.dauphine.blogger.services.EventService" relationship="TO_ONE">
+      <point x="-250.5" y="0.0" />
+      <point x="223.5" y="0.0" />
+    </edge>
+    <edge source="com.dauphine.blogger.services.impl.CategoryServiceImpl" target="com.dauphine.blogger.services.exceptions.CategoryNotFoundByIdException" relationship="CREATE">
+      <point x="0.0" y="105.0" />
+      <point x="0.0" y="-31.5" />
+    </edge>
+    <edge source="com.dauphine.blogger.services.impl.CategoryServiceImpl" target="com.dauphine.blogger.services.CategoryService" relationship="REALIZATION">
+      <point x="-157.0" y="0.0" />
+      <point x="142.0" y="0.0" />
+    </edge>
+    <edge source="com.dauphine.blogger.controllers.CategoryController" target="com.dauphine.blogger.services.CategoryService" relationship="TO_ONE">
+      <point x="272.5" y="0.0" />
+      <point x="-142.0" y="0.0" />
+    </edge>
+    <edge source="com.dauphine.blogger.services.impl.EventServiceImpl" target="com.dauphine.blogger.services.CategoryService" relationship="TO_ONE">
+      <point x="0.0" y="165.0" />
+      <point x="0.0" y="-91.5" />
+    </edge>
+    <edge source="com.dauphine.blogger.models.EventReview" target="com.dauphine.blogger.models.Event" relationship="TO_ONE">
+      <point x="-0.0" y="-153.0" />
+      <point x="983.0" y="596.0" />
+      <point x="-207.0" y="77.0" />
+    </edge>
+    <edge source="com.dauphine.blogger.controllers.EventController" target="com.dauphine.blogger.repository.CategoryRepository" relationship="TO_ONE">
+      <point x="0.0" y="153.0" />
+      <point x="0.0" y="-31.5" />
+    </edge>
+    <edge source="com.dauphine.blogger.models.Event" target="com.dauphine.blogger.models.Category" relationship="TO_ONE">
+      <point x="207.0" y="0.0" />
+      <point x="-90.5" y="0.0" />
+    </edge>
+    <edge source="com.dauphine.blogger.services.impl.CategoryServiceImpl" target="com.dauphine.blogger.repository.CategoryRepository" relationship="TO_ONE">
+      <point x="157.0" y="0.0" />
+      <point x="-136.0" y="0.0" />
+    </edge>
+    <edge source="com.dauphine.blogger.services.impl.EventServiceImpl" target="com.dauphine.blogger.models.EventReview" relationship="CREATE">
+      <point x="45.75" y="165.0" />
+      <point x="648.75" y="1039.0" />
+      <point x="-118.5" y="0.0" />
+    </edge>
+    <edge source="com.dauphine.blogger.services.impl.EventServiceImpl" target="com.dauphine.blogger.services.EventService" relationship="REALIZATION">
+      <point x="0.0" y="-165.0" />
+      <point x="0.0" y="151.5" />
+    </edge>
+    <edge source="com.dauphine.blogger.services.impl.EventServiceImpl" target="com.dauphine.blogger.repository.EventRepository" relationship="TO_ONE">
+      <point x="-223.5" y="0.0" />
+      <point x="182.0" y="0.0" />
+    </edge>
+    <edge source="com.dauphine.blogger.services.impl.CategoryServiceImpl" target="com.dauphine.blogger.models.Category" relationship="CREATE">
+      <point x="0.0" y="-105.0" />
+      <point x="0.0" y="93.0" />
+    </edge>
+  </edges>
+  <settings layout="Channel" zoom="0.29966329966329974" showDependencies="true" x="1545.8089887640447" y="330.68539325842676" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
